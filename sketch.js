@@ -9,7 +9,7 @@ var rand;
 
 var maxDrops=100;
 
-var thunderCreatedFrame=0;
+var chkpoint;
 
 function preload(){
     thunder1 = loadImage("thunderbolt/1.png");
@@ -44,6 +44,9 @@ function draw(){
     rand = Math.round(random(1,4));
     if(frameCount%80===0){
         
+        // a variable to store frameCount
+        chkpoint= frameCount;
+        
         thunder = createSprite(random(10,370), random(10,30), 10, 10);
         switch(rand){
             case 1: thunder.addImage(thunder1);
@@ -58,8 +61,9 @@ function draw(){
         }
         thunder.scale = random(0.3,0.6)
     }
-
-    if(frameCount %90===0 && thunder){
+  //add 20 to chkpoint(which has the frameCount stored,
+    //and try to equate with frameCount .. that means we are checking whther the frameCount is more than 20 frames from when the thunder was created
+    if(chkpoint+20===frameCount && thunder){
         thunder.destroy();
     }
 
